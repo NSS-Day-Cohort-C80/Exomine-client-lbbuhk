@@ -36,7 +36,7 @@ export const renderColonyInventory = () => {
             return `
                 <li class="inventory-item">
                     <div class="item-name">${mineral.name}</div>
-                    <div class="item-qty">${colonyMinerals.quantity} tons</div>
+                    <div class="item-qty">${colonyMineralsArray.quantity} tons</div>
                 </li>`
             
         }).join("")
