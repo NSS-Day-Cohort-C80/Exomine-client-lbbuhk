@@ -10,14 +10,14 @@ export const renderGovernors = async () => {
     const response = await fetch("http://localhost:8088/governors")
     const governor = await response.json()
 
-    const governorDropDown = renderGovernors.map((governor) => {
+    const governorDropDown = governor.map((governor) => {
         return `<option value="${governor.id}">${governor.name}</option>`
     })
 
     return `
         <div>
             <select id="wheel">
-                <option value="0">Select a set of wheels...</option>
+                <option value="0">Choose a governor...</option>
                 ${governorDropDown.join("")}
             </select>
         </div>
