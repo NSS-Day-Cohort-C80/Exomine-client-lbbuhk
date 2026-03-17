@@ -1,4 +1,97 @@
 {
-    "minerals":[],
-    "facilityMinerals": []
+    "facilityMinerals": [
+        {
+            "facilityId": 1,
+            "mineralId": 1,
+            "quantity": 345
+        },
+        {    
+            "facilityId": 1,
+            "mineralId": 1,
+            "quantity": 678
+        },
+        {
+            "facilityId": 1,
+            "mineralId": 1,
+            "quantity": 910
+        }
+    ],
+    "governors": [
+        {
+            "id": 1,
+            "name":"Patricia Purdy",
+            "colonyId":1,
+            "status": "true"
+        },
+        {
+            "id": 2,
+            "name":"Katrina Bahringer",
+            "colonyId":2,
+            "status": "true"
+        },
+        {
+            "id": 3,
+            "name":"Lola Wolff",
+            "colonyId":3,
+            "status":"true"
+        },
+        {
+            "id": 4,
+            "name":"Damon Hartman",
+            "colonyId":1,
+            "status":"true"
+        }
+    ],
+    "colonies":[
+        {
+            "id": 1,
+            "name": "Earth"
+        },
+        {
+            "id": 2,
+            "name": "Mars"
+        },
+        {
+            "id": 3,
+            "name": "Europa"
+        }
+    ],
+
+    "minerals":[
+        {
+            "id": 1,
+            "name": "Iron"
+        },
+         {
+            "id": 2,
+            "name": "Chromium"
+        },
+         {
+            "id": 3,
+            "name": "Sodium"
+        },
+         {
+            "id": 4,
+            "name": "Molybdenum"
+        }
+    ],
+    "facilities":[
+        {
+            "id": 1,
+            "name":"Ganymede",
+            "status":"true"
+        },
+        {
+            "id": 2,
+            "name":"Lo",
+            "status":"true"
+        },
+        {
+            "id": 3,
+            "name":"Titan",
+            "status":"true"
+        }
+    ],
+
+    "colonyMineral": []
 }
