@@ -1,20 +1,21 @@
 import { renderGovernors } from "./governors.js"
 import { renderFacilities } from "./facilities.js"
 import { renderSpaceCart } from "./spaceCart.js"
-import { renderColonyInventory } from ".colonyInventory.js"
+import { renderColonyInventory } from "./colonyInventory.js"
 
 
 const container = document.querySelector("#container")
 
 const render = async () => {
     const governorsHTML = /*await*/ renderGovernors()
-    const facilitiesHTML = /*await*/ renderFacilities()
+    const facilitiesHTML = await renderFacilities()
     const colonyInventoryHTML = /*await*/ renderColonyInventory()
     const spaceCartHTML = /*await*/ renderSpaceCart()
 
 
 
-    const composedHTML = `
+    const composedHTML = 
+    `
         <h1>Solar System Mining Marketplace</h1>
         <article class="dropdown_menus">
             <section class="dropdown_governor_choices">
