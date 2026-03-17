@@ -4,6 +4,10 @@ const state = {
     selectedGovernorId: null
 }
 
+export const getSelectedGovernorId = () => {
+    return state.selectedGovernorId
+}
+
 export const setFacilityChoice = (facilityId) => {
     state.selectedFacilityId = facilityId
     document.dispatchEvent(new CustomEvent("stateChanged"))
