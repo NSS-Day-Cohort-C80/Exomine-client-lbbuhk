@@ -6,7 +6,7 @@ export const renderColonyInventory = () => {
         return <div class="select">Select a governor to view colony inventory</div>
     }
     
-    const governor = database.governors.find(g => g.id === transientState.governorId)
+    const governor = database.governors.find(gArray => gArray.id === transientState.governorId)
     if (!governor) {
         return <div class="error">Governor not found</div>
     }
