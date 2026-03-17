@@ -22,12 +22,12 @@ const render = async () => {
             <section class="dropdown_governor_choices">
                 <h2>Choose a governor</h2>
                 ${governorsHTML}
-            </section>`
+            </section>
          <section class="dropdown_facility_choices">
              <h2>Choose a facility</h2>
              ${facilitiesHTML}
          </section>
-     </article>'
+     </article>
         
      <section class="radio_facility_inventory">
          <h2>Facility Minerals</h2>
