@@ -1,10 +1,28 @@
 const state = {
-
+    selectedMineralId: null,
+    selectedFacilityId: null,
+    selectedGovernorId: null
 }
 
-export const setFacility = (facilityId) => {
-    state.selectedFacility = facilityId
+// setter functions
+export const setFacilityChoice = (facilityId) => {
+    state.selectedFacilityId = facilityId
     document.dispatchEvent(new CustomEvent("stateChanged"))
+}
+
+export const setGovernorChoice = (governorId) => {
+    state.selectedGovernorId = governorId
+    document.dispatchEvent(new CustomEvent("stateChanged")) 
+}
+
+export const setMineralId = (mineralId) => {
+    state.selectedMineralId = mineralId
+    document.dispatchEvent(new CustomEvent("stateChanged"))
+}
+
+// getter functions
+export const getSelectedFacilityId = () => {
+    return state.selectedFacilityId
 }
 
 export const purchaseMineral = () => {
@@ -19,8 +37,6 @@ export const purchaseMineral = () => {
 
         Only the foolhardy try to solve this problem with code.
     */
+        document.dispatchEvent(new CustomEvent("stateChanged"))
 
-
-
-    document.dispatchEvent(new CustomEvent("stateChanged"))
-}
+    }
