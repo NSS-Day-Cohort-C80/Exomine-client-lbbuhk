@@ -30,8 +30,8 @@ export const renderColonyInventory = () => {
         
     }
     
-    const inventoryItems = colonyMinerals.map(colonyMinerals => {
-            const mineral = database.minerals.find(mArray => mArray.id === colonyMinerals.mineralId)
+    const inventoryItems = colonyMinerals.map(colonyMineralsArray => {
+            const mineral = database.minerals.find(mArray => mArray.id === colonyMineralsArray.mineralId)
             if (!mineral) return ""
             return `
                 <li class="inventory-item">
