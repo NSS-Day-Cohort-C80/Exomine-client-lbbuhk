@@ -4,6 +4,7 @@ const state = {
     selectedGovernorId: null
 }
 
+// setter functions
 export const setFacilityChoice = (facilityId) => {
     state.selectedFacilityId = facilityId
     document.dispatchEvent(new CustomEvent("stateChanged"))
@@ -18,9 +19,13 @@ export const setMineralId = (mineralId) => {
     state.selectedMineralId = mineralId
     document.dispatchEvent(new CustomEvent("stateChanged"))
 }
-   
 
-    export const purchaseMineral = () => {
+// getter functions
+export const getSelectedFacilityId = () => {
+    return state.selectedFacilityId
+}
+
+export const purchaseMineral = () => {
     /*
         Does the chosen governor's colony already own some of this mineral?
             - If yes, what should happen?
