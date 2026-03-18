@@ -1,6 +1,6 @@
 import { renderGovernors } from "./governors.js"
 import { renderFacilities, renderFacilityInventory } from "./facilities.js"
-import { renderSpaceCart, spaceCartButton } from "./spaceCart.js"
+import { /*renderSpaceCart,*/ spaceCartButton } from "./spaceCart.js"
 import { renderColonyInventory } from "./colonyInventory.js"
 
 
@@ -10,9 +10,9 @@ const render = async () => {
     const governorsHTML = await renderGovernors()
     const facilitiesHTML = await renderFacilities()
     const facilityInventoryHTML = await renderFacilityInventory()
-    const colonyInventoryHTML = /*await*/ renderColonyInventory()
-    const spaceCartHTML = /*await*/ renderSpaceCart()
-
+    const colonyInventoryHTML = await renderColonyInventory()
+//    const spaceCartHTML = /*await*/ renderSpaceCart()
+    const spaceButton = spaceCartButton()
 
 
 
@@ -33,23 +33,24 @@ const render = async () => {
       </article>
         
       <section class="radio_facility_inventory">
-          <h2>Facility Minerals</h2>
           ${colonyInventoryHTML}
       </section>
         
 
       <article class="order">
-          ${spaceCartButton}
-      </article>
+      <h2>Space Cart</h2>
+          ${spaceButton}
+      </article>`
 
-      <article class="customOrders">
-          <h2>Space Cart</h2>
-          ${spaceCartHTML}
-      </article>
-  `
+//       <article class="customOrders">
+//           <h2>Space Cart</h2>
+//           ${spaceCartHTML}
+//       </article>
+//   `
     container.innerHTML = composedHTML
 }
 
 document.addEventListener("facilitySelected", render)
+document.addEventListener("governorSelected", render)
 
 render()

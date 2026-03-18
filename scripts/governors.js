@@ -3,12 +3,11 @@ export const addGovernorListener = (changeEvent) => {
     if (changeEvent.target.id === "governor") {
         const chosenOption = parseInt(changeEvent.target.value)
         setGovernorChoice(chosenOption)
+        document.dispatchEvent(new CustomEvent("governorSelected"))
     }
 }
 document.addEventListener("change", addGovernorListener)
-if (changeEvent.target.name === "governor") {
-        setGovernorChoice(parseInt(changeEvent.target.value))
-    }
+
 export const renderGovernors = async () => {
     const response = await fetch("http://localhost:8088/governors")
     const governor = await response.json()

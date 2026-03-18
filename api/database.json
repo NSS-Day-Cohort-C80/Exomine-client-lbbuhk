@@ -98,5 +98,16 @@
         }
     ],
 
-    "colonyMineral": []
+    "colonyMinerals": [
+        {
+            "colonyId": 1,
+            "mineralId": 1,
+            "quantity": 7
+        },
+        {
+            "colonyId": 1,
+            "mineralId": 4,
+            "quantity": 23
+        }
+    ]
 }

@@ -1,12 +1,11 @@
-import database from "./database.js"
 import { getSelectedGovernorId } from "./TransientState.js"
  
 export const renderColonyInventory = async () => {
 
-    if (!getSelectedGovernorId()) {
-        return `<div class="select">Select a governor to view colony inventory</div>`
-    }
-    
+    // if (!getSelectedGovernorId()) {
+    //     return `<div class="select">Select a governor to view colony inventory</div>`
+    // }
+    const selectedGovernorId = getSelectedGovernorId()
     const governorResponse = await fetch("http://localhost:8088/governors")
     const governors = await governorResponse.json()
     const coloniesResponse = await fetch("http://localhost:8088/colonies")
@@ -16,9 +15,9 @@ export const renderColonyInventory = async () => {
     const mineralsResponse = await fetch("http://localhost:8088/minerals")
     const minerals = await mineralsResponse.json()
 
-    const governor = governors.find(gArray => gArray.id === getSelectedGovernorId())
+    const governor = governors.find(gArray => gArray.id === selectedGovernorId)
     if (!governor) {
-        return `<div class="error">Governor not found</div>`
+        return `<div class="error">Please select a governor.</div>`
     }
     
     const colonyId = governor.colonyId

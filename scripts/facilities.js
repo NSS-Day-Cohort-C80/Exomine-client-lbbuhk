@@ -1,5 +1,5 @@
-import { setFacilityChoice } from "./TransientState.js"
-import { getSelectedFacilityId } from "./TransientState.js"
+import { setFacilityChoice, setMineralId, getSelectedFacilityId, getSelectedMineralId } from "./TransientState.js"
+
 
 
 
@@ -11,13 +11,17 @@ const handleFacilityChoice = (changeEvent) => {
     }
 }
 
+const handleFacilityMineralChoice = (changeEvent) => {
+    if(changeEvent.target.type === "radio") {
+        const convertedToInteger = parseInt(changeEvent.target.value)
+        setMineralId(convertedToInteger)
+    }
+}
 
 export const renderFacilities = async () => {
     const response = await fetch("http://localhost:8088/facilities")
     const facilities = await response.json()
-    
-    
-
+    const selectedFacilityId = getSelectedFacilityId()
     const facilitiesHTML = facilities.map(
         (facility) => {
             return `<option name="${facility.name}" value="${facility.id}" />${facility.name}</option>`
@@ -34,6 +38,11 @@ export const renderFacilities = async () => {
         </select>
     </div>
     `
+
+    if (selectedFacilityId) {
+        const selectElement = document.querySelector("#facility")
+        selectElement.value = selectedFacilityId
+    }
 
     return html
 }
@@ -73,3 +82,4 @@ export const renderFacilityInventory = async () => {
 }
 
 document.addEventListener("change", handleFacilityChoice)
+document.addEventListener("change", handleFacilityMineralChoice)
