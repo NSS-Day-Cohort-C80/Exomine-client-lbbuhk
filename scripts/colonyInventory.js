@@ -26,6 +26,8 @@ export const renderColonyInventory = async () => {
     
     const colonyMineralsResponse = await fetch("http://localhost:8088/colonies")
     const colonyMineral = await colonyMineralsResponse.json()
+    const mineralsResponse = await fetch("http://localhost:8088/colonies")
+    const minerals = await mineralsResponse.json()
     const colonyMinerals = colonyMineral.filter(cmArray => cmArray.colonyId === colonyId)
     
     if (colonyMinerals.length === 0) {
@@ -37,7 +39,7 @@ export const renderColonyInventory = async () => {
     }
 
     const inventoryItems = colonyMinerals.map(colonyMineralsArray => {
-            const mineral = database.minerals.find(mArray => mArray.id === colonyMineralsArray.mineralId)
+            const mineral = minerals.find(mArray => mArray.id === colonyMineralsArray.mineralId)
             if (!mineral) return ""
             return `
                 <li class="inventory-item">
