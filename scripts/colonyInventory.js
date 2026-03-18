@@ -26,7 +26,7 @@ export const renderColonyInventory = async () => {
     
     const colonyMineralsResponse = await fetch("http://localhost:8088/colonies")
     const colonyMineral = await colonyMineralsResponse.json()
-    const mineralsResponse = await fetch("http://localhost:8088/colonies")
+    const mineralsResponse = await fetch("http://localhost:8088/minerals")
     const minerals = await mineralsResponse.json()
     const colonyMinerals = colonyMineral.filter(cmArray => cmArray.colonyId === colonyId)
     
