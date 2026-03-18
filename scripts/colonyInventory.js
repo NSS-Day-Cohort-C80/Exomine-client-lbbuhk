@@ -1,18 +1,28 @@
 import database from "./database.js"
 import { getSelectedGovernorId } from "./TransientState.js"
  
-export const renderColonyInventory = () => {
+export const renderColonyInventory = async () => {
+
     if (!getSelectedGovernorId()) {
         return <div class="select">Select a governor to view colony inventory</div>
     }
     
-    const governor = database.governors.find(gArray => gArray.id === getSelectedGovernorId())
+    const governorResponse = await fetch("http://localhost:8088/governors")
+    const governors = await governorResponse.json()
+    const coloniesResponse = await fetch("http://localhost:8088/colonies")
+    const colonies = await coloniesResponse.json()
+    const colonyMineralsResponse = await fetch("http://localhost:8088/colonyMinerals")
+    const colonyMineral = await colonyMineralsResponse.json()
+    const mineralsResponse = await fetch("http://localhost:8088/minerals")
+    const minerals = await mineralsResponse.json()
+
+    const governor = governors.find(gArray => gArray.id === getSelectedGovernorId())
     if (!governor) {
         return <div class="error">Governor not found</div>
     }
     
     const colonyId = governor.colonyId
-    const colony = database.colonies.find(cArray => cArray.id === colonyId)
+    const colony = colonies.find(cArray => cArray.id === colonyId)
     let colonyName
     if (colony) {
         colonyName = colony.name
@@ -20,7 +30,7 @@ export const renderColonyInventory = () => {
         colonyName = "Unknown"
     }
     
-    const colonyMinerals = database.colonyMineral.filter(cmArray => cmArray.colonyId === colonyId)
+    const colonyMinerals = colonyMineral.filter(cmArray => cmArray.colonyId === colonyId)
     
     if (colonyMinerals.length === 0) {
         return `
@@ -29,9 +39,9 @@ export const renderColonyInventory = () => {
             </div>`
         
     }
-    
+
     const inventoryItems = colonyMinerals.map(colonyMineralsArray => {
-            const mineral = database.minerals.find(mArray => mArray.id === colonyMineralsArray.mineralId)
+            const mineral = minerals.find(mArray => mArray.id === colonyMineralsArray.mineralId)
             if (!mineral) return ""
             return `
                 <li class="inventory-item">
