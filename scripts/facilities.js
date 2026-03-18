@@ -1,5 +1,4 @@
-import { getSelectedFacilityId, setFacilityChoice } from "./TransientState.js"
-
+//import { setFacilityChoice } from "./TransientState.js"
 const handleFacilityChoice = (changeEvent) => {
     if(changeEvent.target.dataset.type === "facility") {
         const convertedToInteger = parseInt(changeEvent.target.value)

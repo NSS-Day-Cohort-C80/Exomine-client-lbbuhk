@@ -4,6 +4,10 @@ const state = {
     selectedGovernorId: null
 }
 
+export const getSelectedGovernorId = () => {
+    return state.selectedGovernorId
+}
+
 // setter functions
 export const setFacilityChoice = (facilityId) => {
     state.selectedFacilityId = facilityId
@@ -36,7 +40,20 @@ export const purchaseMineral = () => {
         should use the method of POST, and when you should use PUT.
 
         Only the foolhardy try to solve this problem with code.
-    */
+    */  
         document.dispatchEvent(new CustomEvent("stateChanged"))
 
     }
+export const spaceCartButton = async () => {
+   
+   const postOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(state)
+    }
+const response = await fetch("http://localhost:8088/spaceCart", postOptions)
+const customEvent = new CustomEvent("orderSubmitted")
+document.dispatchEvent(customEvent)
+}

@@ -1,12 +1,12 @@
 import database from "./database.js"
-import { state } from "./TransientState.js"
+import { getSelectedGovernorId } from "./TransientState.js"
  
 export const renderColonyInventory = () => {
-    if (!state.selectedGovernorId) {
+    if (!getSelectedGovernorId()) {
         return <div class="select">Select a governor to view colony inventory</div>
     }
     
-    const governor = database.governors.find(gArray => gArray.id === state.selectedGovernorId)
+    const governor = database.governors.find(gArray => gArray.id === getSelectedGovernorId())
     if (!governor) {
         return <div class="error">Governor not found</div>
     }
@@ -36,7 +36,7 @@ export const renderColonyInventory = () => {
             return `
                 <li class="inventory-item">
                     <div class="item-name">${mineral.name}</div>
-                    <div class="item-qty">${colonyMinerals.quantity} tons</div>
+                    <div class="item-qty">${colonyMineralsArray.quantity} tons</div>
                 </li>`
             
         }).join("")

@@ -1,6 +1,6 @@
 import { renderGovernors } from "./governors.js"
 import { renderFacilities } from "./facilities.js"
-import { renderSpaceCart } from "./spaceCart.js"
+import { renderSpaceCart, spaceCartButton } from "./spaceCart.js"
 import { renderColonyInventory } from "./colonyInventory.js"
 
 
@@ -41,7 +41,7 @@ const render = async () => {
         
 
      <article class="order">
-         ${buttonHTML}
+         ${spaceCartButton}
      </article>
 
      <article class="customOrders">
