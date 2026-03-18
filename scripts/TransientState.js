@@ -4,10 +4,6 @@ const state = {
     selectedGovernorId: null
 }
 
-export const getSelectedGovernorId = () => {
-    return state.selectedGovernorId
-}
-
 // setter functions
 export const setFacilityChoice = (facilityId) => {
     state.selectedFacilityId = facilityId
@@ -27,6 +23,14 @@ export const setMineralId = (mineralId) => {
 // getter functions
 export const getSelectedFacilityId = () => {
     return state.selectedFacilityId
+}
+
+export const getSelectedGovernorId = () => {
+    return state.selectedGovernorId
+}
+
+export const getSelectedMineralId = () => {
+    return state.selectedMineralId
 }
 
 export const purchaseMineral = () => {
