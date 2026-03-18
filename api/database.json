@@ -5,14 +5,19 @@
             "mineralId": 1,
             "quantity": 345
         },
-        {    
+                {
             "facilityId": 1,
-            "mineralId": 1,
+            "mineralId": 2,
+            "quantity": 27
+        },
+        {    
+            "facilityId": 2,
+            "mineralId": 4,
             "quantity": 678
         },
         {
-            "facilityId": 1,
-            "mineralId": 1,
+            "facilityId": 3,
+            "mineralId": 3,
             "quantity": 910
         }
     ],

@@ -7,9 +7,12 @@ const handleFacilityChoice = (changeEvent) => {
 }
 
 
+
 export const renderFacilities = async () => {
     const response = await fetch("http://localhost:8088/facilities")
     const facilities = await response.json()
+    
+    document.addEventListener("change", handleFacilityChoice)
     
     const facilitiesHTML = facilities.map(
         (facility) => {
@@ -31,3 +34,21 @@ export const renderFacilities = async () => {
     return html
 }
 
+export const renderFacilityInventory = async () => {
+    
+    const response = await fetch("http://localhost:8088/facilityMinerals?_expand=mineral")
+    const minerals = await response.json()
+
+    const facilityId = getSelectedFacilityId()
+    // TODO: 
+    const mineralsHTML = minerals.map(
+        (mineral) => {
+            return `<li><input type="radio" name="mineral" value="${mineral.mineralId}" /> ${mineral.name}`
+        }
+    )
+
+    let html = `
+        <div>
+
+    `
+}
