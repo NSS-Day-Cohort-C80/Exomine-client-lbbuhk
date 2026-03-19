@@ -20,7 +20,7 @@ export const mineralToPurchase = async () => {
     if(!selectedFacility || !selectedMineral) {
         return ""
     } else {
-        return`<h2> 1 ton of ${mineral.name} from ${facility.name}</h2>`
+        return`<p> 1 ton of ${mineral.name} from ${facility.name}</p>`
     }
 }
 

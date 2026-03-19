@@ -1,7 +1,8 @@
 const state = {
     selectedMineralId: null,
     selectedFacilityId: null,
-    selectedGovernorId: null
+    selectedGovernorId: null,
+    selectedColonyId: null
 }
 
 // setter functions
@@ -10,9 +11,11 @@ export const setFacilityChoice = (facilityId) => {
     document.dispatchEvent(new CustomEvent("stateChanged"))
 }
 
-export const setGovernorChoice = (governorId) => {
+export const setGovernorChoice = (governorId, colonyId) => {
     state.selectedGovernorId = governorId
-    document.dispatchEvent(new CustomEvent("stateChanged")) 
+    state.selectedColonyId = colonyId
+    document.dispatchEvent(new CustomEvent("stateChanged"))
+    console.log(state.selectedColonyId) 
 }
 
 export const setMineralId = (mineralId) => {
@@ -31,6 +34,10 @@ export const getSelectedGovernorId = () => {
 
 export const getSelectedMineralId = () => {
     return state.selectedMineralId
+}
+
+export const getSelectedColonyId = () => {
+    return state.selectedColonyId
 }
 
 export const purchaseMineral = () => {
@@ -57,7 +64,34 @@ export const spaceCartButton = async () => {
         },
         body: JSON.stringify(state)
     }
-const response = await fetch("http://localhost:8088/spaceCart", postOptions)
-const customEvent = new CustomEvent("orderSubmitted")
-document.dispatchEvent(customEvent)
+// const response = await fetch("http://localhost:8088/facilityMinerals?_expand=facility&_expand=mineral", postOptions)
+// const facilityInfo = await response.json()
+// const customEvent = new CustomEvent("orderSubmitted")
+// document.dispatchEvent(customEvent)
+// }
+
+// const governorsResponse = await fetch("http://localhost8088:/governors")
+// const governors = await governorsResponse.json()
+// /*
+
+//     PUT method 
+// colonyMinerals.quantity++
+// facilityMinerals.quantity--
+// } else {
+//     POST method
+//     colonyMinerals.push(
+//         {
+//             "colonyId": response,
+//             "mineralId": 4,
+//             "quantity": 1
+//         }
+//     )
+// }
+// */
+// if (governors.id === selectedGovernorId) {
+//     const govColId = governors.colonyId
+//     if (govColId === colonies.id) {
+//         const colonyName = colonies.name
+//         return colonyName
+//     }
 }
