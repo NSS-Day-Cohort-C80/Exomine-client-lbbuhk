@@ -1,4 +1,4 @@
-import { setFacilityChoice, setMineralId, getSelectedFacilityId, getSelectedGovernorId } from "./TransientState.js"
+import { setFacilityChoice, setMineralId, getSelectedFacilityId, getSelectedGovernorId, getSelectedMineralId } from "./TransientState.js"
 
 
 
@@ -52,7 +52,7 @@ export const renderFacilityInventory = async () => {
     const minerals = await response.json()
     const selectedGovernorId = getSelectedGovernorId()
     const selectedFacilityId = getSelectedFacilityId() 
-
+    const selectedMineralId = getSelectedMineralId()
     if (!selectedGovernorId) {
         return ""
     }
@@ -64,9 +64,13 @@ export const renderFacilityInventory = async () => {
                 if(!facilityName) {
                     facilityName = `for ${mineral.facility.name}`
                 }
+            let saveSelection = ""
+            if (mineral.mineral.id === selectedMineralId) {
+                saveSelection = "checked"
+            }
                 return `
                 <li>
-                    <input type="radio" name="mineral" value="${mineral.mineralId}" /> 
+                    <input type="radio" name="mineral" value="${mineral.mineral.id}" ${saveSelection} /> 
                     ${mineral.quantity} tons of ${mineral.mineral.name}
                 </li>
                 `
