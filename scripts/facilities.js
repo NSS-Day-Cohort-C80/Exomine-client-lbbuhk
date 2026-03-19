@@ -1,4 +1,4 @@
-import { setFacilityChoice, setMineralId, getSelectedFacilityId, getSelectedMineralId } from "./TransientState.js"
+import { setFacilityChoice, setMineralId, getSelectedFacilityId, getSelectedGovernorId } from "./TransientState.js"
 
 
 
@@ -24,7 +24,11 @@ export const renderFacilities = async () => {
     const selectedFacilityId = getSelectedFacilityId()
     const facilitiesHTML = facilities.map(
         (facility) => {
-            return `<option name="${facility.name}" value="${facility.id}" />${facility.name}</option>`
+            let saveSelection = ""
+            if (facility.id === selectedFacilityId) {
+                saveSelection = "selected"
+            }
+            return `<option name="${facility.name}" value="${facility.id}" ${saveSelection}>${facility.name}</option>` 
         }
     )
 
@@ -39,20 +43,24 @@ export const renderFacilities = async () => {
     </div>
     `
 
-    if (selectedFacilityId) {
-        const selectElement = document.querySelector("#facility")
-        selectElement.value = selectedFacilityId
-    }
+    // if (selectedFacilityId) {
+    //     const selectElement = document.querySelector("#facility")
+    //     selectElement.value = selectedFacilityId
+    // }
 
     return html
 }
 
 export const renderFacilityInventory = async () => {
-    
     const response = await fetch("http://localhost:8088/facilityMinerals?_expand=mineral&_expand=facility")
     const minerals = await response.json()
-
+    const selectedGovernorId = getSelectedGovernorId()
     const selectedFacilityId = getSelectedFacilityId() 
+
+    if (!selectedGovernorId) {
+        return ""
+    }
+
     let facilityName = ""
     const mineralsHTML = minerals.map(
         (mineral) => {

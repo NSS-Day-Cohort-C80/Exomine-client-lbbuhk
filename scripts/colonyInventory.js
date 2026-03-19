@@ -15,7 +15,7 @@ export const renderColonyInventory = async () => {
 
     const governor = governors.find(gArray => gArray.id === selectedGovernorId)
     if (!governor) {
-        return `<div class="error">Please select a governor.</div>`
+        return `<div class="error"><h4>Please select a governor to view colony and facility inventories.</h4></div>`
     }
     
     const colonyId = governor.colonyId
