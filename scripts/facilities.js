@@ -43,7 +43,7 @@ export const renderFacilities = async () => {
         </select>
     </div>
     `
-    
+
     return html
 }
 
