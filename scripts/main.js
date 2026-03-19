@@ -40,7 +40,7 @@ const render = async () => {
         <!-- Right Column -->
         <div class="right-column">
             <section class="radio_facility_inventory">
-                <h2>Mars Minerals</h2>
+                <h2>Colony Minerals</h2>
                 ${colonyInventoryHTML}
             </section>
             
@@ -62,5 +62,5 @@ addOrderButtonListener()
 document.addEventListener("facilitySelected", render)
 document.addEventListener("governorSelected", render)
 document.addEventListener("radioMineralSelected", render)
-
+document.addEventListener("mineralsPurchased", render)
 render()

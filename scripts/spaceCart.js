@@ -35,7 +35,7 @@ export const addOrderButtonListener = () => {
         const selectedGovernor = getSelectedGovernorId()
 
         if (!selectedFacility || !selectedMineral || !selectedGovernor) {
-            alert("Please select a mineral, facility, and governor")
+           
             return
         }
 
@@ -43,14 +43,14 @@ export const addOrderButtonListener = () => {
             // Call the TransientState spaceCartButton to submit the order
             await submitOrder()
             
-            alert("Purchase successful!")
+           
             
             // Dispatch custom event to trigger UI refresh
             document.dispatchEvent(new CustomEvent("mineralsPurchased"))
             
         } catch (error) {
             console.error("Error processing purchase:", error)
-            alert("Error processing purchase")
+           
         }
     })
 }

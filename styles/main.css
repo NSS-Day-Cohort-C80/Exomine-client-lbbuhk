@@ -9,7 +9,7 @@ body {
     background-color: #f0f5f0;
     color: #1a1a1a;
     transform: none;
-    width: 100%;
+    width: auto;
     height: auto;
 }
 
@@ -198,7 +198,7 @@ h2 {
 }
 
 /* Responsive design */
-@media (max-width: 1024px) {
+@media (max-width: 250px) {
     .main-wrapper {
         grid-template-columns: 1fr 1fr;
     }

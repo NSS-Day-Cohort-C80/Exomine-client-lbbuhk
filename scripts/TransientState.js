@@ -53,17 +53,7 @@ export const getSelectedColonyId = () => {
 }
 
 export const purchaseMineral = () => {
-    /*
-        Does the chosen governor's colony already own some of this mineral?
-            - If yes, what should happen?
-            - If no, what should happen?
 
-        Defining the algorithm for this method is traditionally the hardest
-        task for teams during this group project. It will determine when you
-        should use the method of POST, and when you should use PUT.
-
-        Only the foolhardy try to solve this problem with code.
-    */  
         document.dispatchEvent(new CustomEvent("stateChanged"))
 
     }
@@ -75,7 +65,7 @@ export const spaceCartButton = async () => {
     const facilityId = state.selectedFacilityId
     const quantityToPurchase = 1
 
-    console.log("Attempting purchase - Colony:", colonyId, "Mineral:", mineralId, "Facility:", facilityId)
+
 
     try {
         // First, fetch all colonyMinerals to check if this colony already has this mineral
@@ -125,20 +115,57 @@ export const spaceCartButton = async () => {
         
         if (response.ok) {
             const result = await response.json()
-            console.log("Purchase successful:", result)
             
-            // Wait a moment, then fetch updated colonyMinerals
-            setTimeout(async () => {
-                const updatedColonyMineralsResponse = await fetch("http://localhost:8088/colonyMinerals")
-                const updatedColonyMinerals = await updatedColonyMineralsResponse.json()
+            // Now decrease facility minerals by 1
+            const facilityMineralsResponse = await fetch("http://localhost:8088/facilityMinerals")
+            const facilityMinerals = await facilityMineralsResponse.json()
+            
+            
+            
+            // Find the facility mineral entry
+            const facilityMineral = facilityMinerals.find(fm => fm.facilityId === facilityId && fm.mineralId === mineralId)
+            
+           
+            
+            // Wait for facility mineral update to complete
+            if (facilityMineral) {
+                const newQuantity = facilityMineral.quantity - quantityToPurchase
                 
-                // Filter to just this colony's minerals
-                const thisColonyMinerals = updatedColonyMinerals.filter(cm => cm.colonyId === colonyId)
-                console.log("Updated colony minerals:", thisColonyMinerals)
                 
-                setColonyMinerals(thisColonyMinerals)
-                document.dispatchEvent(new CustomEvent("stateChanged"))
-            }, 100)
+                // Use the facility mineral's id if it exists, otherwise use array index
+                const facilityMineralId = facilityMineral.id
+                
+                console.log("Facility mineral id:", facilityMineralId)
+                
+                // Update facility minerals
+                const updateResponse = await fetch(`http://localhost:8088/facilityMinerals/${facilityMineralId}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        id: facilityMineralId,
+                        facilityId: facilityId,
+                        mineralId: mineralId,
+                        quantity: newQuantity
+                    })
+                })
+                
+                console.log("Facility update response status:", updateResponse.status)
+            } else {
+                console.log("No matching facility mineral found for facilityId:", facilityId, "mineralId:", mineralId)
+            }
+            
+            // Fetch updated colonyMinerals and update state
+            const updatedColonyMineralsResponse = await fetch("http://localhost:8088/colonyMinerals")
+            const updatedColonyMinerals = await updatedColonyMineralsResponse.json()
+            
+            // Filter to just this colony's minerals
+            const thisColonyMinerals = updatedColonyMinerals.filter(cm => cm.colonyId === colonyId)
+            console.log("Updated colony minerals:", thisColonyMinerals)
+            
+            setColonyMinerals(thisColonyMinerals)
+            document.dispatchEvent(new CustomEvent("stateChanged"))
         } else {
             const errorText = await response.text()
             console.error("Backend error:", errorText)
