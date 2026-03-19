@@ -15,6 +15,7 @@ const handleFacilityMineralChoice = (changeEvent) => {
     if(changeEvent.target.type === "radio") {
         const convertedToInteger = parseInt(changeEvent.target.value)
         setMineralId(convertedToInteger)
+        document.dispatchEvent(new CustomEvent("radioMineralSelected"))
     }
 }
 
@@ -42,12 +43,7 @@ export const renderFacilities = async () => {
         </select>
     </div>
     `
-
-    // if (selectedFacilityId) {
-    //     const selectElement = document.querySelector("#facility")
-    //     selectElement.value = selectedFacilityId
-    // }
-
+    
     return html
 }
 

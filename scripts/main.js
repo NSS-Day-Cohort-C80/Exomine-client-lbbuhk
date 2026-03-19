@@ -52,5 +52,6 @@ const render = async () => {
 
 document.addEventListener("facilitySelected", render)
 document.addEventListener("governorSelected", render)
+document.addEventListener("radioMineralSelected", render)
 
 render()
