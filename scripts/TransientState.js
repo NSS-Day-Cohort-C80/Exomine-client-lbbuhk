@@ -67,7 +67,6 @@ export const spaceCartButton = async () => {
 
 
 
-    try {
         // First, fetch all colonyMinerals to check if this colony already has this mineral
         const colonyMineralsResponse = await fetch("http://localhost:8088/colonyMinerals")
         const colonyMinerals = await colonyMineralsResponse.json()
@@ -173,9 +172,4 @@ export const spaceCartButton = async () => {
         
         const customEvent = new CustomEvent("orderSubmitted")
         document.dispatchEvent(customEvent)
-    } catch (error) {
-        console.error("Error submitting order:", error)
-        const customEvent = new CustomEvent("orderSubmitted")
-        document.dispatchEvent(customEvent)
-    }
 }
