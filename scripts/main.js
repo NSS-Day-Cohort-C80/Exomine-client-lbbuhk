@@ -59,5 +59,6 @@ container.innerHTML = composedHTML
 
 document.addEventListener("facilitySelected", render)
 document.addEventListener("governorSelected", render)
+document.addEventListener("radioMineralSelected", render)
 
 render()

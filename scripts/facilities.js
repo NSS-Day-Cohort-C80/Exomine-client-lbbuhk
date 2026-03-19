@@ -15,6 +15,7 @@ const handleFacilityMineralChoice = (changeEvent) => {
     if(changeEvent.target.type === "radio") {
         const convertedToInteger = parseInt(changeEvent.target.value)
         setMineralId(convertedToInteger)
+        document.dispatchEvent(new CustomEvent("radioMineralSelected"))
     }
 }
 
