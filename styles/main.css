@@ -1,27 +1,55 @@
+html {
+    overflow-y: scroll;
+    height: 100%;
+}
+
 body {
     font-family: Arial, sans-serif;
     padding: 2rem;
-    background-color: #fff;
-    color: #222;
+    background-color: #f0f5f0;
+    color: #1a1a1a;
+    transform: none;
+    width: 100%;
+    height: auto;
+}
+
+/* Logo styling - fixed at top right, stays on screen */
+.logo {
+    position: fixed ;
+    top: 1.5rem;
+    right: 2rem;
+    width: 180px;
+    height: 180px;
+    z-index: 9999;
+    filter: drop-shadow(0 2px 8px rgba(27, 77, 47, 0.15));
+    object-fit: contain;
+    pointer-events: auto;
+    margin: 0;
+    padding: 0;
 }
 
 h1 {
     font-size: 2rem;
     margin-bottom: 2rem;
+    margin-top: 0;
     font-weight: bold;
+    color: #1b4d2f;
+    padding-right: 200px;
 }
 
 h2 {
     font-size: 1.2rem;
     margin-bottom: 1rem;
     font-weight: bold;
+    color: #2d6e47;
 }
 
 /* Main wrapper - 2 columns */
 .main-wrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.2fr;
     gap: 2rem;
+    margin-top: 2rem;
 }
 
 /* Left column container */
@@ -50,28 +78,51 @@ h2 {
     font-size: 0.95rem;
     margin: 0;
     font-weight: normal;
+    color: #2d6e47;
+    text-transform: capitalize;
 }
 
 .dropdown_governor_choices select,
 .dropdown_facility_choices select {
     padding: 0.5rem;
-    border: 1px solid #ccc;
+    border: 2px solid #4a9d6f;
     border-radius: 4px;
     font-size: 0.95rem;
+    background-color: #ffffff;
+    color: #1a1a1a;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.dropdown_governor_choices select:hover,
+.dropdown_facility_choices select:hover {
+    border-color: #2d6e47;
+    box-shadow: 0 2px 4px rgba(43, 110, 71, 0.1);
+}
+
+.dropdown_governor_choices select:focus,
+.dropdown_facility_choices select:focus {
+    outline: none;
+    border-color: #1b4d2f;
+    box-shadow: 0 0 0 3px rgba(43, 110, 71, 0.15);
 }
 
 /* Facility Minerals section */
 .facility_inventory {
-    border: 2px dashed #999;
+    border: 2px solid #4a9d6f;
+    background-color: #ffffff;
     padding: 2rem;
     min-height: 200px;
     flex-grow: 1;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(43, 110, 71, 0.1);
 }
 
 .facility_inventory h2 {
     text-align: center;
     margin-top: 0;
     margin-bottom: 1.5rem;
+    color: #2d6e47;
 }
 
 /* Right column container */
@@ -83,20 +134,25 @@ h2 {
 
 /* Radio facility inventory (Colony/Mars Minerals) */
 .radio_facility_inventory {
-    border: 2px dashed #999;
+    border: 2px solid #4a9d6f;
+    background-color: #ffffff;
     padding: 2rem;
     min-height: 200px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(43, 110, 71, 0.1);
 }
 
 .radio_facility_inventory h2 {
     text-align: center;
     margin-top: 0;
     margin-bottom: 1.5rem;
+    color: #2d6e47;
 }
 
 /* Space Cart section */
 .customOrders {
-    border: 2px dashed #999;
+    border: 2px solid #4a9d6f;
+    background-color: #ffffff;
     padding: 2rem;
     min-height: 200px;
     display: flex;
@@ -105,11 +161,14 @@ h2 {
     justify-content: center;
     gap: 1.5rem;
     flex-grow: 1;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(43, 110, 71, 0.1);
 }
 
 .customOrders h2 {
     text-align: center;
     margin: 0;
+    color: #2d6e47;
 }
 
 /* Order/Button */
@@ -118,15 +177,50 @@ h2 {
 }
 
 #spaceCartBtn {
-    background-color: rgb(255, 0, 0);
-    color: #000000;
-    border: 2px solid #000000;
+    background-color: #2d6e47;
+    color: #ffffff;
+    border: 2px solid #1b4d2f;
     padding: 0.75rem 1.75rem;
     font-size: 1rem;
     border-radius: 4px;
     cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
 }
 
 #spaceCartBtn:hover {
-    background-color: #15ff00;
+    background-color: #1b4d2f;
+    box-shadow: 0 4px 8px rgba(27, 77, 47, 0.3);
+}
+
+#spaceCartBtn:active {
+    transform: scale(0.98);
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    .main-wrapper {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    h1 {
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+    
+    .main-wrapper {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        padding-right: 0;
+    }
 }
