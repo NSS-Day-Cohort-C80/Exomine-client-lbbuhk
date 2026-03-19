@@ -1,6 +1,6 @@
 import { renderGovernors } from "./governors.js"
 import { renderFacilities, renderFacilityInventory } from "./facilities.js"
-import { /*renderSpaceCart,*/ spaceCartButton } from "./spaceCart.js"
+import { mineralToPurchase, spaceCartButton } from "./spaceCart.js"
 import { renderColonyInventory } from "./colonyInventory.js"
 
 
@@ -11,43 +11,50 @@ const render = async () => {
     const facilitiesHTML = await renderFacilities()
     const facilityInventoryHTML = await renderFacilityInventory()
     const colonyInventoryHTML = await renderColonyInventory()
-//    const spaceCartHTML = /*await*/ renderSpaceCart()
+    const spaceCartHTML = await mineralToPurchase()
     const spaceButton = spaceCartButton()
 
 
 
     const composedHTML = `
-         <h1>Solar System Mining Marketplace</h1>
-         <article class="dropdown_menus">
-             <section class="dropdown_governor_choices">
-                 <h2>Choose a governor</h2>
-                 ${governorsHTML}
-             </section>
-          <section class="dropdown_facility_choices">
-              <h2>Choose a facility</h2>
-              ${facilitiesHTML}
-          </section>
-          <section class="facility_inventory">
-            ${facilityInventoryHTML}
-        </section>
-      </article>
+    <h1>Solar System Mining Marketplace</h1>
+    
+    <div class="main-wrapper">
+        <!-- Left Column -->
+        <div class="left-column">
+            <article class="dropdown_menus">
+                <section class="dropdown_governor_choices">
+                    <h2>Choose a governor</h2>
+                    ${governorsHTML}
+                </section>
+                <section class="dropdown_facility_choices">
+                    <h2>Choose a facility</h2>
+                    ${facilitiesHTML}
+                </section>
+            </article>
+            
+            <section class="facility_inventory">
+                ${facilityInventoryHTML}
+            </section>
+        </div>
         
-      <section class="radio_facility_inventory">
-          ${colonyInventoryHTML}
-      </section>
-        
+        <!-- Right Column -->
+        <div class="right-column">
+            <section class="radio_facility_inventory">
+                <h2>Mars Minerals</h2>
+                ${colonyInventoryHTML}
+            </section>
+            
+            <article class="customOrders">
+                <h2>Space Cart</h2>
+                ${spaceButton}
+                ${spaceCartHTML}
+            </article>
+        </div>
+    </div>
+`
 
-      <article class="order">
-      <h2>Space Cart</h2>
-          ${spaceButton}
-      </article>`
-
-//       <article class="customOrders">
-//           <h2>Space Cart</h2>
-//           ${spaceCartHTML}
-//       </article>
-//   `
-    container.innerHTML = composedHTML
+container.innerHTML = composedHTML
 }
 
 document.addEventListener("facilitySelected", render)

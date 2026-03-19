@@ -1,17 +1,27 @@
-import { getSelectedMineralId } from "./TransientState.js"
-
-const mineralsResponse = await fetch("http://localhost:8088/minerals")
-const minerals = await mineralsResponse.json()
-const facilitiesResponse = await fetch("http://localhost:8088/facilities")
-const facilities = await facilitiesResponse.json()
-const selectedFacility = getSelectedfacilityId()
-const selectedMineral = getSelectedMineralId()
+import { getSelectedMineralId, getSelectedFacilityId } from "./TransientState.js"
 
 
-export const mineralToPurchase = () => {
+
+
+export const mineralToPurchase = async () => {
+    
+    const mineralsResponse = await fetch("http://localhost:8088/minerals")
+    const minerals = await mineralsResponse.json()
+    
+    const facilitiesResponse = await fetch("http://localhost:8088/facilities")
+    const facilities = await facilitiesResponse.json()
+
+    const selectedFacility = getSelectedFacilityId()
+    const selectedMineral = getSelectedMineralId()
+
     const mineral = minerals.find(mArray => mArray.id === selectedMineral)
     const facility = facilities.find(fArray => fArray.id === selectedFacility)
-    return`<h2> 1 ton of ${mineral.name} from ${facility.name}</h2>`
+    
+    if(!selectedFacility || !selectedMineral) {
+        return ""
+    } else {
+        return`<h2> 1 ton of ${mineral.name} from ${facility.name}</h2>`
+    }
 }
 
 
@@ -35,21 +45,4 @@ const facilities = await facilitiesResponse.json()
 const selectedFacility = getSelectedfacilityId()
 const selectedMineral = getSelectedMineralId()
 
-
-export const mineralToPurchase = () => {
-    const mineral = minerals.find(mArray => mArray.id === selectedMineral)
-    const facility = facilities.find(fArray => fArray.id === selectedFacility)
-    return`<h2> 1 ton of ${mineral.name} from ${facility.name}</h2>`
-}
-
-
-export const spaceCartButton = () => {
-    return `<button id="spaceCartBtn">Purchase Mineral</button>`
-}
-
-export const addOrderButtonListener = () => {
-    document.querySelector("#spaceCartBtn").addEventListener("click", () => {
-        spaceCartButton()
-    })
-}
  */

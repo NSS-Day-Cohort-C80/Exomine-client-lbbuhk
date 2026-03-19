@@ -43,11 +43,6 @@ export const renderFacilities = async () => {
     </div>
     `
 
-    // if (selectedFacilityId) {
-    //     const selectElement = document.querySelector("#facility")
-    //     selectElement.value = selectedFacilityId
-    // }
-
     return html
 }
 
