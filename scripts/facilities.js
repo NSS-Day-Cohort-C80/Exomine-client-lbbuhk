@@ -68,6 +68,8 @@ export const renderFacilityInventory = async () => {
             if (mineral.mineral.id === selectedMineralId) {
                 saveSelection = "checked"
             }
+                
+            if (mineral.quantity > 0)
                 return `
                 <li>
                     <input type="radio" name="mineral" value="${mineral.mineral.id}" ${saveSelection} /> 
