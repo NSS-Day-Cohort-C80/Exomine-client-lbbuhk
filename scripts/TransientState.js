@@ -12,9 +12,11 @@ export const setFacilityChoice = (facilityId) => {
     document.dispatchEvent(new CustomEvent("stateChanged"))
 }
 
-export const setGovernorChoice = (governorId) => {
+export const setGovernorChoice = (governorId, colonyId) => {
     state.selectedGovernorId = governorId
-    document.dispatchEvent(new CustomEvent("stateChanged")) 
+    state.selectedColonyId = colonyId
+    document.dispatchEvent(new CustomEvent("stateChanged"))
+    console.log(state.selectedColonyId) 
 }
 
 export const setMineralId = (mineralId) => {
