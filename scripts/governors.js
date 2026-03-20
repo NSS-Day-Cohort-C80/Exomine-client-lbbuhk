@@ -1,20 +1,37 @@
-import { setGovernorChoice } from "./TransientState.js"
-export const addGovernorListener = (changeEvent) => {
+import { setGovernorChoice, getSelectedGovernorId, } from "./TransientState.js"
+
+export const addGovernorListener = async (changeEvent) => {
     if (changeEvent.target.id === "governor") {
-        const chosenOption = parseInt(changeEvent.target.value)
-        setGovernorChoice(chosenOption)
+        const chosenGovernorId = parseInt(changeEvent.target.value)
+        
+        if (chosenGovernorId !== 0) {
+            // Fetch the governor data to get their colony ID
+            const response = await fetch("http://localhost:8088/governors")
+            const governors = await response.json()
+            const selectedGovernor = governors.find(gov => gov.id === chosenGovernorId)
+            
+            if (selectedGovernor && selectedGovernor.colonyId) {
+                setGovernorChoice(chosenGovernorId, selectedGovernor.colonyId)
+            }
+        }
+        
+        
+        document.dispatchEvent(new CustomEvent("governorSelected"))
     }
 }
 document.addEventListener("change", addGovernorListener)
-if (changeEvent.target.name === "governor") {
-        setGovernorChoice(parseInt(changeEvent.target.value))
-    }
+
 export const renderGovernors = async () => {
     const response = await fetch("http://localhost:8088/governors")
     const governor = await response.json()
+    const selectedGovernorId = getSelectedGovernorId()
 
     const governorDropDown = governor.map((governor) => {
-        return `<option value="${governor.id}">${governor.name}</option>`
+        let saveSelection = ""
+        if (governor.id === selectedGovernorId) {
+            saveSelection = "selected"
+        }
+        return `<option value="${governor.id}" ${saveSelection}>${governor.name}</option>`
     })
       return `<div>
             <select id="governor">
