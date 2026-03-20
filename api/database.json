@@ -4,7 +4,7 @@
       "id": 1,
       "facilityId": 1,
       "mineralId": 1,
-      "quantity": 327
+      "quantity": 325
     },
     {
       "id": 2,
@@ -16,7 +16,7 @@
       "id": 3,
       "facilityId": 2,
       "mineralId": 4,
-      "quantity": 649
+      "quantity": 647
     },
     {
       "id": 4,
@@ -105,7 +105,7 @@
       "id": 1,
       "colonyId": 2,
       "mineralId": 4,
-      "quantity": 5
+      "quantity": 7
     },
     {
       "id": 2,
@@ -126,10 +126,10 @@
       "quantity": 3
     },
     {
+      "id": 5,
       "colonyId": 1,
       "mineralId": 1,
-      "quantity": 1,
-      "id": 5
+      "quantity": 3
     },
     {
       "id": 6,
