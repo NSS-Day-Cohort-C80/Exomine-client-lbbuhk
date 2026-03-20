@@ -1,6 +1,5 @@
-import { getSelectedMineralId, getSelectedFacilityId } from "./TransientState.js"
-
-
+import { getSelectedMineralId, getSelectedFacilityId, setColonyMinerals, getSelectedGovernorId } from "./TransientState.js"
+import { spaceCartButton as submitOrder } from "./TransientState.js"
 
 
 export const mineralToPurchase = async () => {
@@ -30,19 +29,34 @@ export const spaceCartButton = () => {
 }
 
 export const addOrderButtonListener = () => {
-    document.querySelector("#spaceCartBtn").addEventListener("click", () => {
-        spaceCartButton()
+    document.querySelector("#spaceCartBtn").addEventListener("click", async () => {
+        const selectedFacility = getSelectedFacilityId()
+        const selectedMineral = getSelectedMineralId()
+        const selectedGovernor = getSelectedGovernorId()
+
+        if (!selectedFacility || !selectedMineral || !selectedGovernor) {
+           
+            return
+        }
+
+        try {
+            // Call the TransientState spaceCartButton to submit the order
+            await submitOrder()
+            
+           
+            
+            // Dispatch custom event to trigger UI refresh
+            document.dispatchEvent(new CustomEvent("mineralsPurchased"))
+            
+        } catch (error) {
+            console.error("Error processing purchase:", error)
+           
+        }
     })
 }
 
-/**
-import { getSelectedMineralId } from "./TransientState"
-
-const mineralsResponse = await fetch("http://localhost:8088/minerals")
-const minerals = await mineralsResponse.json()
-const facilitiesResponse = await fetch("http://localhost:8088/facilities")
-const facilities = await facilitiesResponse.json()
-const selectedFacility = getSelectedfacilityId()
-const selectedMineral = getSelectedMineralId()
-
- */
+// Listen for order submission success
+document.addEventListener("orderSubmitted", async () => {
+    // You can add any additional UI updates here after order is submitted
+    console.log("Order submitted successfully")
+})

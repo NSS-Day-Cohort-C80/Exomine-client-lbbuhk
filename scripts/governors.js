@@ -1,9 +1,21 @@
-import { setGovernorChoice, getSelectedGovernorId } from "./TransientState.js"
+import { setGovernorChoice, getSelectedGovernorId, setSelectedColonyId } from "./TransientState.js"
 
-export const addGovernorListener = (changeEvent) => {
+export const addGovernorListener = async (changeEvent) => {
     if (changeEvent.target.id === "governor") {
-        const chosenOption = parseInt(changeEvent.target.value)
-        setGovernorChoice(chosenOption)
+        const chosenGovernorId = parseInt(changeEvent.target.value)
+        
+        if (chosenGovernorId !== 0) {
+            // Fetch the governor data to get their colony ID
+            const response = await fetch("http://localhost:8088/governors")
+            const governors = await response.json()
+            const selectedGovernor = governors.find(gov => gov.id === chosenGovernorId)
+            
+            if (selectedGovernor && selectedGovernor.colonyId) {
+                setSelectedColonyId(selectedGovernor.colonyId)
+            }
+        }
+        
+        setGovernorChoice(chosenGovernorId)
         document.dispatchEvent(new CustomEvent("governorSelected"))
     }
 }
