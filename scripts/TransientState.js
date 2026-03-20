@@ -65,10 +65,17 @@ export const spaceCartButton = async () => {
     const mineralId = state.selectedMineralId
     const facilityId = state.selectedFacilityId
     const quantityToPurchase = 1
+
     const colonyMineralsResponse = await fetch("http://localhost:8088/colonyMinerals")
     const colonyMinerals = await colonyMineralsResponse.json()
-    const existingMineral = colonyMinerals.find(cm => cm.colonyId === colonyId && cm.mineralId === mineralId)
+
+    const existingMineral = colonyMinerals.find(cm => 
+    cm.mineralId === mineralId &&
+    (cm.colonyId === colonyId || cm.colonyId === undefined)
+)
+
     let response
+
     if (existingMineral) {
         const updatedQuantity = existingMineral.quantity + quantityToPurchase
             response = await fetch(`http://localhost:8088/colonyMinerals/${existingMineral.id}`, {
@@ -100,10 +107,14 @@ export const spaceCartButton = async () => {
         const result = await response.json()
         const facilityMineralsResponse = await fetch("http://localhost:8088/facilityMinerals")
             const facilityMinerals = await facilityMineralsResponse.json()
+
             const facilityMineral = facilityMinerals.find(fm => fm.facilityId === facilityId && fm.mineralId === mineralId)
+
             if (facilityMineral) {
                 const newQuantity = facilityMineral.quantity - quantityToPurchase
+
                 const facilityMineralId = facilityMineral.id
+
                 console.log("Facility mineral id:", facilityMineralId)
                 const updateResponse = await fetch(`http://localhost:8088/facilityMinerals/${facilityMineralId}`, {
                     method: "PUT",
@@ -117,7 +128,7 @@ export const spaceCartButton = async () => {
                         quantity: newQuantity
                     })
                 })
-
+                console.log("Facility update response status:", updateResponse.status)
             } else {
             }
         const updatedColonyMineralsResponse = await fetch("http://localhost:8088/colonyMinerals")
