@@ -49,8 +49,7 @@ export const addOrderButtonListener = () => {
             document.dispatchEvent(new CustomEvent("mineralsPurchased"))
             
         } catch (error) {
-            console.error("Error processing purchase:", error)
-           
+            
         }
     })
 }
