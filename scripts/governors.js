@@ -5,7 +5,6 @@ export const addGovernorListener = async (changeEvent) => {
         const chosenGovernorId = parseInt(changeEvent.target.value)
         
         if (chosenGovernorId !== 0) {
-            // Fetch the governor data to get their colony ID
             const response = await fetch("http://localhost:8088/governors")
             const governors = await response.json()
             const selectedGovernor = governors.find(gov => gov.id === chosenGovernorId)

@@ -3,7 +3,6 @@ import { renderFacilities, renderFacilityInventory } from "./facilities.js"
 import { mineralToPurchase, spaceCartButton, addOrderButtonListener } from "./spaceCart.js"
 import { renderColonyInventory } from "./colonyInventory.js"
 
-
 const container = document.querySelector("#container")
 
 const render = async () => {
@@ -14,12 +13,9 @@ const render = async () => {
     const spaceCartHTML = await mineralToPurchase()
     const spaceButton = spaceCartButton()
 
-
-
     const composedHTML = `
     <h1>Solar System Mining Marketplace</h1>
     <div class="main-wrapper">
-        <!-- Left Column -->
         <div class="left-column">
             <article class="dropdown_menus">
                 <section class="dropdown_governor_choices">
@@ -37,7 +33,6 @@ const render = async () => {
             </section>
         </div>
         
-        <!-- Right Column -->
         <div class="right-column">
             <section class="radio_facility_inventory">
                 <h2>Colony Minerals</h2>
@@ -55,7 +50,6 @@ const render = async () => {
 
 container.innerHTML = composedHTML
 
-// Attach the event listener to the button after it's rendered to the DOM
 addOrderButtonListener()
 }
 

@@ -40,12 +40,8 @@ export const addOrderButtonListener = () => {
         }
 
         try {
-            // Call the TransientState spaceCartButton to submit the order
             await submitOrder()
             
-           
-            
-            // Dispatch custom event to trigger UI refresh
             document.dispatchEvent(new CustomEvent("mineralsPurchased"))
             
         } catch (error) {
@@ -54,8 +50,6 @@ export const addOrderButtonListener = () => {
     })
 }
 
-// Listen for order submission success
+
 document.addEventListener("orderSubmitted", async () => {
-    // You can add any additional UI updates here after order is submitted
-    console.log("Order submitted successfully")
 })

@@ -4,7 +4,7 @@ html {
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial;
     padding: 2rem;
     background-color: #f0f5f0;
     color: #1a1a1a;
@@ -13,7 +13,6 @@ body {
     height: auto;
 }
 
-/* Logo styling - fixed at top right, stays on screen */
 .logo {
     position: fixed ;
     top: 1.5rem;
@@ -44,7 +43,7 @@ h2 {
     color: #2d6e47;
 }
 
-/* Main wrapper - 2 columns */
+
 .main-wrapper {
     display: grid;
     grid-template-columns: 1fr 1.2fr;
@@ -52,7 +51,7 @@ h2 {
     margin-top: 2rem;
 }
 
-/* Left column container */
+
 .left-column {
     display: flex;
     flex-direction: column;
@@ -107,7 +106,7 @@ h2 {
     box-shadow: 0 0 0 3px rgba(43, 110, 71, 0.15);
 }
 
-/* Facility Minerals section */
+
 .facility_inventory {
     border: 2px solid #4a9d6f;
     background-color: #ffffff;
@@ -125,14 +124,14 @@ h2 {
     color: #2d6e47;
 }
 
-/* Right column container */
+
 .right-column {
     display: flex;
     flex-direction: column;
     gap: 2rem;
 }
 
-/* Radio facility inventory (Colony/Mars Minerals) */
+
 .radio_facility_inventory {
     border: 2px solid #4a9d6f;
     background-color: #ffffff;
@@ -149,7 +148,6 @@ h2 {
     color: #2d6e47;
 }
 
-/* Space Cart section */
 .customOrders {
     border: 2px solid #4a9d6f;
     background-color: #ffffff;
@@ -171,7 +169,7 @@ h2 {
     color: #2d6e47;
 }
 
-/* Order/Button */
+
 .order {
     text-align: center;
 }
@@ -197,7 +195,7 @@ h2 {
     transform: scale(0.98);
 }
 
-/* Responsive design */
+
 @media (max-width: 250px) {
     .main-wrapper {
         grid-template-columns: 1fr 1fr;

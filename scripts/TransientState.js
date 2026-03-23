@@ -6,7 +6,6 @@ const state = {
     selectedColonyId: null
 }
 
-// setter functions
 export const setFacilityChoice = (facilityId) => {
     state.selectedFacilityId = facilityId
     document.dispatchEvent(new CustomEvent("stateChanged"))
@@ -16,7 +15,6 @@ export const setGovernorChoice = (governorId, colonyId) => {
     state.selectedGovernorId = governorId
     state.selectedColonyId = colonyId
     document.dispatchEvent(new CustomEvent("stateChanged"))
-    console.log(state.selectedColonyId) 
 }
 
 export const setMineralId = (mineralId) => {
@@ -33,7 +31,6 @@ export const setSelectedColonyId = (colonyId) => {
     state.selectedColonyId = colonyId
 }
 
-// getter functions
 export const getSelectedFacilityId = () => {
     return state.selectedFacilityId
 }
@@ -64,14 +61,14 @@ export const spaceCartButton = async () => {
     const colonyId = state.selectedColonyId
     const mineralId = state.selectedMineralId
     const facilityId = state.selectedFacilityId
-    const quantityToPurchase = 1
+    const quantityToPurchase = 1 //ton
 
     const colonyMineralsResponse = await fetch("http://localhost:8088/colonyMinerals")
     const colonyMinerals = await colonyMineralsResponse.json()
 
     const existingMineral = colonyMinerals.find(cm => 
     cm.mineralId === mineralId &&
-    (cm.colonyId === colonyId || cm.colonyId === undefined)
+    cm.colonyId === colonyId
 )
 
     let response
@@ -107,15 +104,11 @@ export const spaceCartButton = async () => {
         const result = await response.json()
         const facilityMineralsResponse = await fetch("http://localhost:8088/facilityMinerals")
             const facilityMinerals = await facilityMineralsResponse.json()
-
             const facilityMineral = facilityMinerals.find(fm => fm.facilityId === facilityId && fm.mineralId === mineralId)
-
             if (facilityMineral) {
                 const newQuantity = facilityMineral.quantity - quantityToPurchase
 
                 const facilityMineralId = facilityMineral.id
-
-                console.log("Facility mineral id:", facilityMineralId)
                 const updateResponse = await fetch(`http://localhost:8088/facilityMinerals/${facilityMineralId}`, {
                     method: "PUT",
                     headers: {
@@ -128,7 +121,6 @@ export const spaceCartButton = async () => {
                         quantity: newQuantity
                     })
                 })
-                console.log("Facility update response status:", updateResponse.status)
             } else {
             }
         const updatedColonyMineralsResponse = await fetch("http://localhost:8088/colonyMinerals")
